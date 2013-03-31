@@ -9,7 +9,6 @@ my::DateTime::DateTime():unixTimeFlag(false){;}
 
 //-- КОНСТРУКТОР ПО UNIXTIME--
 
-
 my::DateTime::DateTime(time_t _unixTime): unixTime(_unixTime){
     unixTimeFlag = true;
     struct tm * timeinfo;
@@ -33,6 +32,216 @@ my::DateTime::DateTime(int _year, int _month, int _day, int h, int m, int s): ye
 
 my::DateTime::DateTime(int _year, int _month, int _day): year(_year), month(_month), day(_day), hour(0), minute(0), second(0){
     unixTimeFlag = false;
+}
+
+
+//-- КОНСТРУКТОР ПО СТРОКЕ--
+//my::DateTime::DateTime(std::string str)
+//{
+//}
+
+// ПЕРЕВОД В СТРОКУ
+std::string my::DateTime:: str()
+{
+    char c;
+    std::string answer;
+    answer.push_back(c);
+    int a;
+    a = day;
+    for (int i = 0;  i < 2; ++i){
+        int x;
+        if (i == 0) {x = a / 10;} else {x = a %10;}
+        switch (x)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % 10;
+        answer.push_back(c);
+    }
+    answer.push_back('.');
+
+    a = month;
+    for (int i = 0;  i < 2; ++i){
+        int x;
+        if (i == 0) {x = a / 10;} else {x = a %10;}
+        switch (x)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % 10;
+        answer.push_back(c);
+    }
+    answer.push_back('.');
+
+    a = year;
+    int X;
+    X = 1000;
+    for (int i = 0;  i < 4; ++i){
+
+        switch (a / X)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % X;
+        X /= 10;
+        answer.push_back(c);
+    }
+    answer.push_back(' ');
+
+    a = hour;
+    X = 10;
+    for (int i = 0;  i < 2; ++i){
+        switch (a / X)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % X;
+        X /= 10;
+        answer.push_back(c);
+    }
+    answer.push_back(':');
+
+    a = minute;
+    X = 10;
+    for (int i = 0;  i < 2; ++i){
+
+        switch (a / X)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % X;
+        X /= 10;
+        answer.push_back(c);
+    }
+    answer.push_back(':');
+
+    a = second;
+    X = 10;
+    for (int i = 0;  i < 2; ++i){
+
+        switch (a / X)
+          {
+          case 0: c = '0';
+              break;
+          case 1: c = '1';
+              break;
+          case 2: c = '2';
+              break;
+          case 3: c = '3';
+              break;
+          case 4: c = '4';
+              break;
+          case 5: c = '5';
+              break;
+          case 6: c = '6';
+              break;
+          case 7: c = '7';
+              break;
+          case 8: c = '8';
+              break;
+          case 9: c = '9';
+              break;
+          }
+        a = a % X;
+        X /= 10;
+        answer.push_back(c);
+    }
+    return answer;
 }
 
 //  СТАТИЧЕСКИЙ МЕТОД, ВОЗВРАЩАЮЩИЙ ТЕКУЩЕЕ ВРЕМЯ
@@ -189,4 +398,78 @@ int my::DateTime::day_of_week()
     }
 }
 
+// ОПЕРАТОР ПРИСВАИВАНИЯ
+my::DateTime & my::DateTime::operator = (DateTime a){
+     year = a.year;
+     month = a.month;
+     day = a.day;
+     hour = a.hour;
+     minute = a.minute;
+     second = a.second;
+     unixTimeFlag = a.unixTimeFlag;
+     unixTime = a.unixTime;
+     w_day = a.w_day;
+    return *this;
+}
+
+// ОПЕРАОТРЫ СРАВНЕНИЯ
+bool my::DateTime:: operator < (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime < a.unixTime);
+}
+
+bool my::DateTime:: operator > (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime > a.unixTime);
+}
+
+bool my::DateTime:: operator <= (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime <= a.unixTime);
+}
+
+bool my::DateTime:: operator >= (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime >= a.unixTime);
+}
+
+bool my::DateTime:: operator == (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime == a.unixTime);
+}
+
+bool my::DateTime:: operator != (my::DateTime a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    return (unixTime != a.unixTime);
+}
 #endif // DATETIME_H

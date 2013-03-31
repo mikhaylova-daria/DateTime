@@ -16,6 +16,10 @@
     #include <math.h>
     #define MATH_H
 #endif
+#ifndef STRING
+    #include <string>
+    #define STRING
+#endif
 
 namespace my {
 class DateTime {
@@ -37,7 +41,15 @@ public:
     int day_of_week();   // 0, если воскресенье, остальные от 1 до 6
     static DateTime now();
     time_t unixT();
-    //DateTime(string);
+    std::string str();
+    DateTime & operator = (DateTime);
+    bool operator < (DateTime);
+    bool operator > (DateTime);
+    bool operator <= (DateTime);
+    bool operator >= (DateTime);
+    bool operator != (DateTime);
+    bool operator == (DateTime);
+    DateTime(std::string);
 };
 }
 
