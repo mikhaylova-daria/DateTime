@@ -10,8 +10,15 @@ int main()
       time (&rawtime);
       timeinfo = localtime (&rawtime);
       my::DateTime t(rawtime);
+      int i;
+      std::cin>>i;
+      time (&rawtime);
+      timeinfo = localtime (&rawtime);
+      my::DateTime y(rawtime);
+    y = y.Dif(t).span;
+    std::cout<<y.str();
       //std::cout<<t.year<<"\n";
-std::string a = t.str();
+/*std::string a = t.str();
 std::cout<<a;
       //my::DateTime x(t.year, t.month, t.day, t.hour, t.minute, t.second);
   //    t.str();
@@ -23,6 +30,6 @@ std::cout<<a;
         //std::cout<<x.unixTime<<"\n";
       // std::cout<<x.hour;
       //std::cout<<t.day_of_week();
-  //    printf ("Current local time and date: %s", asctime(timeinfo));
+  //    printf ("Current local time and date: %s", asctime(timeinfo));*/
       return 0;
 }

@@ -256,7 +256,10 @@ my::DateTime my::DateTime::now()
       return t;
 }
 
-//время в формате unixtime
+
+
+
+//ВРЕМЯ В UNIXTIME
 
 time_t my::DateTime::unixT(){
     if (unixTimeFlag){
@@ -398,6 +401,35 @@ int my::DateTime::day_of_week()
     }
 }
 
+
+// РАЗНИЦА
+
+my::TimeSpan my::DateTime::Dif (DateTime a)
+{
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.unixTimeFlag){
+        a.unixT();
+    }
+    size_t x;
+    if (a.unixTime > this->unixTime) {
+
+        x = a.unixTime - this->unixTime;
+    } else {
+       x = this->unixTime - a.unixTime;
+    }
+    DateTime _answer(x);
+    _answer.year = _answer.year - 1970;
+    _answer.day -= 1;
+    _answer.month -=1;
+    _answer.hour -= 3; //+часовой пояс
+    TimeSpan answer;
+    answer.span = _answer;
+    return answer;
+}
+
+
 // ОПЕРАТОР ПРИСВАИВАНИЯ
 my::DateTime & my::DateTime::operator = (DateTime a){
      year = a.year;
@@ -411,6 +443,7 @@ my::DateTime & my::DateTime::operator = (DateTime a){
      w_day = a.w_day;
     return *this;
 }
+
 
 // ОПЕРАОТРЫ СРАВНЕНИЯ
 bool my::DateTime:: operator < (my::DateTime a){

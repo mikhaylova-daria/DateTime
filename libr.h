@@ -22,8 +22,8 @@
 #endif
 
 namespace my {
+class TimeSpan;
 class DateTime {
-public:
     int year;
     int month;
     int day;
@@ -42,6 +42,7 @@ public:
     static DateTime now();
     time_t unixT();
     std::string str();
+    my::TimeSpan Dif(DateTime);
     DateTime & operator = (DateTime);
     bool operator < (DateTime);
     bool operator > (DateTime);
@@ -51,9 +52,14 @@ public:
     bool operator == (DateTime);
     DateTime(std::string);
 };
+class TimeSpan
+{
+public:
+    DateTime span;
+  public:
+    friend class DateTime;
+};
 }
-
-
 #ifndef DATETIME_H
 #include "DateTime.h"
 #endif
