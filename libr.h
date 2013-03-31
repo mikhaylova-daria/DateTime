@@ -13,15 +13,20 @@
     #define  _NEW
 #endif
 #ifndef MATH_H
-    #include <math.h>
-    #define MATH_H
+#include <math.h>
+#define MATH_H
 #endif
 #ifndef STRING
-    #include <string>
-    #define STRING
+#include <string>
+#define STRING
+#endif
+#ifndef IOSTREAM
+#include <iostream>
+#define IOSTREAM
 #endif
 
 namespace my {
+
 class TimeSpan;
 class DateTime {
     int year;
@@ -52,7 +57,9 @@ public:
     bool operator == (DateTime);
     DateTime operator + (TimeSpan);
     DateTime operator - (TimeSpan);
-    DateTime(std::string);
+
+    friend std::ostream& operator << (std::ostream& ostr, my::DateTime x);
+    friend std::istream& operator>> (std::istream&, my::DateTime &);
 };
 class TimeSpan
 {
@@ -60,7 +67,50 @@ public:
     DateTime span;
   public:
     friend class DateTime;
+    friend std::ostream& operator << (std::ostream& ostr, my::TimeSpan x);
+    friend std::istream& operator>> (std::istream&, my::TimeSpan &);
 };
+std::istream& operator>> (std::istream& istr, my::DateTime & x)
+{
+    int _year, _month, _day, _hour, _minute, _second;
+    istr >> _year;
+    istr >> _month;
+    istr >> _day;
+    istr >> _hour;
+    istr >> _minute;
+    istr >> _second;
+    my::DateTime answer(_year, _month, _day, _hour, _minute, _second);
+    x = answer;
+    return (istr);
+}
+
+
+std::ostream& operator << (std::ostream& ostr, my::DateTime x)
+{
+    ostr<<x.str();
+    return (ostr);
+}
+
+std::istream& operator>> (std::istream& istr, my::TimeSpan & x)
+{
+    int _year, _month, _day, _hour, _minute, _second;
+    istr >> _year;
+    istr >> _month;
+    istr >> _day;
+    istr >> _hour;
+    istr >> _minute;
+    istr >> _second;
+    my::DateTime answer(_year, _month, _day, _hour, _minute, _second);
+    x.span = answer;
+    return (istr);
+}
+
+
+std::ostream& operator << (std::ostream& ostr, my::TimeSpan x)
+{
+    ostr<<x.span.str();
+    return (ostr);
+}
 }
 #ifndef DATETIME_H
 #include "DateTime.h"

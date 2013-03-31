@@ -535,4 +535,26 @@ bool my::DateTime:: operator != (my::DateTime a){
     }
     return (unixTime != a.unixTime);
 }
+
+//ОПЕРАТОРЫ ВВОДА - ВЫВОДА
+/*std::istream& operator>> (std::istream& istr, my::DateTime & x)
+{
+    int _year, _month, _day, _hour, _minute, _second;
+    istr >> _year;
+    istr >> _month;
+    istr >> _day;
+    istr >> _hour;
+    istr >> _minute;
+    istr >> _second;
+    my::DateTime answer(_year, _month, _day, _hour, _minute, _second);
+    x = answer;
+    return (istr);
+}
+
+
+std::ostream& operator << (std::ostream& ostr, my::DateTime x)
+{
+    ostr<<x.str();
+    return (ostr);
+}*/
 #endif // DATETIME_H
