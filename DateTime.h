@@ -429,6 +429,36 @@ my::TimeSpan my::DateTime::Dif (DateTime a)
     return answer;
 }
 
+// СЛОЖЕНИЕ
+my::DateTime  my::DateTime::operator + (my::TimeSpan a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.span.unixTimeFlag){
+        a.span.unixT();
+    }
+    DateTime answer(unixTime + a.span.unixTime);
+    return answer;
+}
+
+my::DateTime  my::DateTime::operator - (my::TimeSpan a){
+    if (!unixTimeFlag){
+        this->unixT();
+    }
+    if(!a.span.unixTimeFlag){
+        a.span.unixT();
+    }
+    size_t x;
+    if (unixTime - a.span.unixTime < 0) {
+        std::cout<< "Дата меньше начала эпохи"<<'\n';
+        x = 0;
+    } else {
+        x = unixTime - a.span.unixTime;
+    }
+    DateTime answer(x);
+    return answer;
+}
+
 
 // ОПЕРАТОР ПРИСВАИВАНИЯ
 my::DateTime & my::DateTime::operator = (DateTime a){

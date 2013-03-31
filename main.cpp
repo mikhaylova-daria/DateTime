@@ -15,8 +15,14 @@ int main()
       time (&rawtime);
       timeinfo = localtime (&rawtime);
       my::DateTime y(rawtime);
-    y = y.Dif(t).span;
-    std::cout<<y.str();
+  //  y = y.Dif(t).span;
+    //std::cout<<y.str()<<'\n';
+    my::TimeSpan p = y.Dif(t);
+    std::cout<<p.span.str()<<"\n";
+    my::DateTime z = y + p;
+    std::cout<<t.str()<<"\n";
+    std::cout<<y.str()<<"\n";
+    std::cout<<z.str();
       //std::cout<<t.year<<"\n";
 /*std::string a = t.str();
 std::cout<<a;

@@ -50,6 +50,8 @@ public:
     bool operator >= (DateTime);
     bool operator != (DateTime);
     bool operator == (DateTime);
+    DateTime operator + (TimeSpan);
+    DateTime operator - (TimeSpan);
     DateTime(std::string);
 };
 class TimeSpan
